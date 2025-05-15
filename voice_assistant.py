@@ -105,8 +105,14 @@ async def perform_task(command):
         song = command.replace("play", "").strip()
         talk(f"Playing {song} on YouTube")
         pywhatkit.playonyt(song)
-    elif "stop" in command or "resume" in command:
+    elif "pause" in command or "resume" in command:
         await stop_or_resume_video(command)
+    elif "close" in command:
+        app_name = command.replace("close", "").strip()
+        await close_app(app_name)
+    elif "home" in command:
+        keyboard.press_and_release('win+d')
+        talk("Going to Home screen")
     elif "time" in command:
         current_time = datetime.datetime.now().strftime('%I:%M %p')
         talk(f"The current time is {current_time}")
